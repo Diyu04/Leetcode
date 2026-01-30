@@ -3,7 +3,7 @@ class Solution {
         int even=0;
         for(int i=0;i<nums.length;i++){
             if(nums[i]%2==0) even++;
-            if(even==2) return true;
+            if(even>=2) return true; // atleast two even
         }
         return false;
     }
