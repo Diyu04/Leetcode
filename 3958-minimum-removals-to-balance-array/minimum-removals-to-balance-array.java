@@ -3,15 +3,18 @@ class Solution {
         int n = nums.length;
         Arrays.sort(nums);
 
-        int ans = n;
-        int right=0;
-        for(int left=0;left<n;left++){
-            while(right<n && nums[right]<=(long) nums[left]*k){
-                right++;
+       int i = 0;
+        int maxLen = 0;
+
+        for (int j = 0; j < nums.length; j++) {
+            // Use long to prevent integer overflow for nums[i] * k
+            while ((long) nums[j] > (long) nums[i] * k) {
+                i++;
             }
-            ans = Math.min(ans,n-(right-left));
+            maxLen = Math.max(maxLen, j - i + 1);
         }
-        return ans;
+
+        return nums.length - maxLen;
 
     }
 }
