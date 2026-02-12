@@ -1,28 +1,22 @@
 class Solution {
     public int longestBalanced(String s) {
-        int n = s.length();
-        int res=0;
-        int[] count=new int[26];
-
-        for(int i=0;i<n;i++){
-            Arrays.fill(count,0);
-            for(int j=i;j<n;j++){
-                boolean flag=true;
-                int c=s.charAt(j)-'a';
-                count[c]++;
-
-                for(int x:count){
-                    if(x>0 && x!=count[c]){
-                        flag=false;
-                        break;
-                    }
+       int n = s.length();
+        int[] cnt = new int[26];
+        int ans = 0;
+        for (int i = 0; i < n; ++i) {
+            Arrays.fill(cnt, 0);
+            int mx = 0, v = 0;
+            for (int j = i; j < n; ++j) {
+                int c = s.charAt(j) - 'a';
+                if (++cnt[c] == 1) {
+                    ++v;  // number of unique chars
                 }
-                if(flag){
-                    res=Math.max(res,j-i+1);
+                mx = Math.max(mx, cnt[c]); // max frequency
+                if (mx * v == j - i + 1) {
+                    ans = Math.max(ans, j - i + 1);
                 }
             }
         }
-
-        return res;
+        return ans;
     }
 }
