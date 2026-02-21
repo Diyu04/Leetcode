@@ -11,12 +11,10 @@ class Solution {
     }
 
     private boolean isPrime(int n){
-        if(n<=1) return false;
+        // 10^6 = 1111 01000010 01000000
+        // most amount of set bits will be 19
+        // all primes upto 19 are : 2,3,5,7,,11,13,17,19
 
-        for(int i=2;i*i<=n;i++){
-            if(n%i==0) return false;
-        }
-    
-    return true;
+        return (n==2 || n==3 || n==5 || n==7  || n==11 || n==13 || n==17 || n==19);
     }
 }
