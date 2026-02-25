@@ -1,9 +1,9 @@
 class Solution {
     public int[] sortByBits(int[] arr) {
-         Integer[] temp = new Integer[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            temp[i] = arr[i];
-        }
+        Integer[] temp = Arrays.stream(arr)
+                       .boxed()
+                       .toArray(Integer[]::new);
+       
         Arrays.sort(temp, (a, b) -> {
             int countA = Integer.bitCount(a);
             int countB = Integer.bitCount(b);
