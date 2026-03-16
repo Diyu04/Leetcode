@@ -6,9 +6,13 @@ class Solution {
     // 1-999  -> no comma
     // 1,000  1,001  1,002 ...
         int ans =0;
-        for(int i=0;i<=n;i++){
-            int d=Integer.toString(i).length();
-            ans+=(d-1)/3;
+        int start=1000;
+        int commas=1;
+        
+        while(start<=n){
+            ans+=(n-start+1)*commas;
+            start*=1000;
+            commas++;
         }
         return ans;
     }
