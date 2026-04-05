@@ -1,15 +1,15 @@
 class Solution {
     public boolean judgeCircle(String moves) {
-        int countUD=0;
-        int countLR=0;
+        int x=0;
+        int y=0;
         
 
         for(int i=0;i<moves.length();i++){
-            if(moves.charAt(i)=='U') countUD++;
-            else if(moves.charAt(i)=='D') countUD--;
-            else if(moves.charAt(i)=='R') countLR++;
-            else countLR--;
+            if(moves.charAt(i)=='U') x++;
+            else if(moves.charAt(i)=='D') x--;
+            else if(moves.charAt(i)=='R') y++;
+            else y--;
         }
-        return (countLR==0 && countUD==0);
+        return (x==0 && y==0);
     }
 }
