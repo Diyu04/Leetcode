@@ -1,0 +1,45 @@
+class Solution {
+
+    // initial dirn is north
+        // 0,0 -> 0,4 -> N dirn
+        // 0,4 -> 1,4 -> E dirn -> obs (2,4)
+        // 1,4->1,5 -> 1,6 -> 1,7 -> 1,8 -> N dirn
+        // max dist it ever reaches check for all
+
+    public int robotSim(int[] commands, int[][] obstacles) {
+        
+        // N E S W
+         int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        
+        // Set of obstacles indexes in the format of : obstacle[0] + " " + obstacle[1]
+        Set<String> obstaclesSet = new HashSet<>();
+        for (int[] obstacle : obstacles) {
+            obstaclesSet.add(obstacle[0] + " " + obstacle[1]);
+        }
+
+        int x = 0, y = 0, direction = 0, maxDistSquare = 0;
+        for (int i = 0; i < commands.length; i++) {
+            if (commands[i] == -2) { // Turns left
+                direction = (direction + 3) % 4;
+            } else if (commands[i] == -1) { // Turns right
+                direction = (direction + 1) % 4;
+            } else { // Moves forward commands[i] steps
+                int step = 0;
+                while (step < commands[i] 
+                       && (!obstaclesSet.contains(
+                           (x + directions[direction][0]) + " " + (y + directions[direction][1]))
+                          )
+                      ) {
+                    x += directions[direction][0];
+                    y += directions[direction][1];
+                    step++;
+                }
+            }
+            maxDistSquare = Math.max(maxDistSquare, x * x + y * y);
+        }
+
+        return maxDistSquare;
+
+
+    }
+}
